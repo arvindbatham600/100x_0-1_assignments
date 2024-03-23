@@ -45,7 +45,7 @@ const bodyParser = require("body-parser");
 const app = express();
 app.use(bodyParser.json());
 
-const todos = [
+let todos = [
   {
     id: 1,
     title: "Learn Backend",
@@ -97,7 +97,7 @@ app.post("/todos", (req, res) => {
 // put request to update the specific todo item...
 app.put("/todos/:id", (req, res) => {
   const todoId = parseInt(req.params.id);
-  console.log(todoId)
+  console.log(todoId);
   let done = false;
   todos.map((item) => {
     if (todoId === item.id) {
@@ -109,6 +109,18 @@ app.put("/todos/:id", (req, res) => {
   });
   if (done) {
     res.status(200).send("todo item updated !!");
+  } else {
+    res.status(404).send("todo item not found");
+  }
+});
+
+//delete request to all a specific todo -->
+app.delete("/todos/:id", (req, res) => {
+  const todoId = parseInt(req.params.id);
+  const newTodo = todos.filter((item) => item.id !== todoId);
+  if (newTodo.length < todos.length) {
+    todos = newTodo;
+    res.status(200).send("todo item was found and deleted");
   } else {
     res.status(404).send("todo item not found");
   }
