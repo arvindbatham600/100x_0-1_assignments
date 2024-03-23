@@ -91,7 +91,27 @@ app.post("/todos", (req, res) => {
   };
 
   todos.push(newTodo);
-  res.send("added new todo successfully !!");
+  res.status(201).send("added new todo successfully !!");
+});
+
+// put request to update the specific todo item...
+app.put("/todos/:id", (req, res) => {
+  const todoId = parseInt(req.params.id);
+  console.log(todoId)
+  let done = false;
+  todos.map((item) => {
+    if (todoId === item.id) {
+      item.title = req.body.title;
+      item.isCompleted = req.body.isCompleted;
+      item.description = req.body.description;
+      done = true;
+    }
+  });
+  if (done) {
+    res.status(200).send("todo item updated !!");
+  } else {
+    res.status(404).send("todo item not found");
+  }
 });
 
 app.get("*", (req, res) => {
