@@ -62,7 +62,7 @@ const todos = [
 
 //fetching all the todos at /todos route -->
 app.get("/todos", (req, res) => {
-  res.json(todos);
+  res.send(todos);
 });
 
 // fetching specific todo using id -->
@@ -77,6 +77,25 @@ app.get("/todos/:id", (req, res) => {
   } else {
     res.status(404).send("todo not found");
   }
+});
+
+// post/todos -
+
+app.post("/todos", (req, res) => {
+  const totalTodo = todos.length;
+  const newTodo = {
+    id: totalTodo + 1,
+    title: req.body.title,
+    isCompleted: req.body.isCompleted,
+    description: req.body.description,
+  };
+
+  todos.push(newTodo);
+  res.send("added new todo successfully !!");
+});
+
+app.get("*", (req, res) => {
+  res.status(404).send("route not found");
 });
 
 app.listen(4000, () => {
