@@ -46,18 +46,18 @@ const app = express();
 app.use(bodyParser.json());
 
 let todos = [
-  {
-    id: 1,
-    title: "Learn Backend",
-    isCompleted: "false",
-    description: "I am learning backend",
-  },
-  {
-    id: 2,
-    title: "Learn NextJs",
-    isCompleted: "false",
-    description: "will learn",
-  },
+  // {
+  //   id: 1,
+  //   title: "Learn Backend",
+  //   isCompleted: "false",
+  //   description: "I am learning backend",
+  // },
+  // {
+  //   id: 2,
+  //   title: "Learn NextJs",
+  //   isCompleted: "false",
+  //   description: "will learn",
+  // },
 ];
 
 //fetching all the todos at /todos route -->
@@ -84,7 +84,7 @@ app.get("/todos/:id", (req, res) => {
 app.post("/todos", (req, res) => {
   const totalTodo = todos.length;
   const newTodo = {
-    id: totalTodo + 1,
+    id: Math.floor(Math.random() * 1000000),
     title: req.body.title,
     isCompleted: req.body.isCompleted,
     description: req.body.description,
