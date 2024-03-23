@@ -52,10 +52,31 @@ const todos = [
     isCompleted: "false",
     description: "I am learning backend",
   },
+  {
+    id: 2,
+    title: "Learn NextJs",
+    isCompleted: "false",
+    description: "will learn",
+  },
 ];
 
+//fetching all the todos at /todos route -->
 app.get("/todos", (req, res) => {
   res.json(todos);
+});
+
+// fetching specific todo using id -->
+app.get("/todos/:id", (req, res) => {
+  console.log(`without converting in integer ${req.params.id}`);
+  const todoId = parseInt(req.params.id);
+  console.log(`converting in integer ${todoId}`);
+
+  const specificTodo = todos.filter((item) => item.id === todoId);
+  if (specificTodo.length > 0) {
+    res.status(200).send(specificTodo);
+  } else {
+    res.status(404).send("todo not found");
+  }
 });
 
 app.listen(4000, () => {
