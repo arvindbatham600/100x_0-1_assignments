@@ -60,7 +60,7 @@ let todos = [
   // },
 ];
 
-//fetching all the todos at /todos route -->
+//fetching all the todos at /todos route will return all the todos -->
 app.get("/todos", (req, res) => {
   res.send(todos);
 });
