@@ -65,7 +65,7 @@ app.get("/todos", (req, res) => {
   res.send(todos);
 });
 
-// fetching specific todo using id -->
+// fetching specific todo using id , it will return only todo which matches the id -->
 app.get("/todos/:id", (req, res) => {
   console.log(`without converting in integer ${req.params.id}`);
   const todoId = parseInt(req.params.id);
