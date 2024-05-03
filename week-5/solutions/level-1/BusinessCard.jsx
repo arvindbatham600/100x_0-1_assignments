@@ -79,4 +79,6 @@ export function BusinessCard(props) {
       marginBottom: '5px',
       color: '#555',
     },
-  };
+};
+  
+  // solution
